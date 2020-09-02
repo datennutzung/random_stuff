@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadUI Login</title>
+</head>
+    <body>
+        <h2>Login</h2>
+        <div class="form">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" oninput="areyousure(this)"  />
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" oninput="areyousure(this)"/>
+            </div>
+            <button onclick="wrongpassword()" id="signin">Sign in</button>
+        </div>
+        
+
+        <script>
+            function areyousure(element) {
+                let entered = element.value
+                let answer = prompt("Are you sure you want to enter "+entered+"\n Enter 'yes i want to enter "+entered+"' again to confirm",
+                "No i dont want to enter that!")
+                if (answer != "yes i want to enter "+entered) {
+                    element.value = ""
+                }
+            }
+
+            function wrongpassword() {
+                document.querySelector('#username').value = "";
+                document.querySelector('#password').value = "";
+                alert("Wrong Password! Try again!")
+            }
+        </script>
+        <style>
+            * {
+                font-family: 'Courier New', Courier, monospace;
+                margin-bottom: 5px;
+                box-sizing: border-box;
+                padding: 2px 0;
+            }
+
+            #signin {
+                padding: 2px 5px;
+            }
+
+            h2 {
+                margin-top: 0;
+            }
+        </style>
+    </body>
+</html>

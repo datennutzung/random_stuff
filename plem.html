@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plem Plem</title>
+</head>
+<body>
+    <div class="parent container">
+        <div class="container">
+            <input type="number" id="max_time" value="300" min="2" />
+            <h1 id="time"></h1>
+            <button id="reset" onmousedown="reset()">Reset</button>
+            <h1 id="boom"></h1>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const maxTime = document.querySelector('#max_time');
+        const time = document.querySelector('#time'); 
+        const boom = document.querySelector('#boom');
+        var timer = setInterval(decrement, 1000);
+        reset();
+
+        function reset() {
+            if (boom.innerText == "") {
+                time.innerText = maxTime.value;
+            }            
+        }
+
+        function decrement() {
+            let timeVal = parseInt(time.innerText)-1;
+            time.innerText = timeVal;
+            if (timeVal <= 0) {
+                boom.innerText = "💥"
+                clearInterval(timer);
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        .parent {
+            height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            place-items: center;
+        }
+    </style>
+</body>
+</html>

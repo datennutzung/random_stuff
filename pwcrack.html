@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plem Plem</title>
+</head>
+<body>
+    <div class="parent container">
+        <div class="w-100 container">
+            <div id="ben"></div>
+            <h1 class="done">ACCESS GRANTED!</h1>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const ben = document.querySelector('#ben');
+        const done = document.querySelector('.done');
+        const password = "CorrectHorseBatteryStaple!"//getPassword()
+        const nspan = password.length;
+        for (let i = 0; i < nspan; i++) {
+            ben.innerHTML += "<span class='random' solved='false'>_</span>";
+        }
+        const spans = document.getElementsByClassName("random");
+        var timer = setInterval(randomf, 1);
+        var index = 0;
+        var solved = 0;
+
+        function randomf() {
+            let i = index;
+                if (spans[i].getAttribute("solved") == "false") {
+                    let random_char = getRandomChar();
+                    spans[i].innerText = random_char;
+                    if (random_char == password[i]) {
+                        spans[i].setAttribute("solved", "true")
+                        index++;
+                        solved+=1;
+                    }
+                }
+            if (index >= nspan) {
+                index = 0;
+            }
+            if (solved >= nspan) {
+                done.style.display = "block"
+                clearInterval(timer)
+            }
+        }
+
+        function getPassword(len) {
+            let p = ""
+            for (let i = 0; i < len; i++) {
+                p += getRandomChar()
+            }
+            return p
+        }
+
+        function getRandomChar() {
+            let code = 33+getRandomInt(94)
+            while (code in [34 , 44, 46 ,60, 62, 92, 95, 96, 124]) {
+                code = 33+getRandomInt(94)
+            }
+            return String.fromCharCode(code)
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            font-family:'Courier New', Courier, monospace;
+            font-size: xx-large;
+            background-color: black;
+        }
+
+        .parent {
+            height: 100vh;
+        }
+
+        #ben {
+            padding: 1rem;
+        }
+
+        .w-100 {
+            width:100%;
+        }
+
+        .done {
+            display: none;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            background-color: rgb(100, 255, 50);
+            transition: all linear 2s;
+        }
+
+        .random[solved="true"] {
+            color: rgb(100, 255, 50);
+        }
+
+        .random[solved="false"] {
+            color: red;
+        }
+
+        .container {
+            display: grid;
+            place-items: center;
+        }
+    </style>
+</body>
+</html>
