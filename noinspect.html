@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Inspect</title>
+</head>
+    <body>
+        <div id="container">
+            <h1>Real Bank</h1>
+            <h4>Account: 127.0.0.1:5500</h4>
+            <table>
+                <tr>
+                    <th>Account</th>
+                    <th>Money</th>
+                </tr>
+                <tr>
+                    <td>Credit</td>
+                    <td>$<span id="credit_money">12,345.67</span></td>
+                </tr>
+                <tr>
+                    <td>Savings</td>
+                    <td>$<span id="savings_money">987,554.32</span></td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            const accounts = ["Credit", "Savings"]
+            const container = document.querySelector('#container')
+            const credit_money = document.querySelector("#credit_money");
+            const savings_money = document.querySelector("#savings_money");
+            var scam = false;
+            const credit = credit_money.innerText;
+            const savings = savings_money.innerText;
+
+            const scammer = document.createElement("div");
+            scammer.classList += "warning scam";
+            setInterval(fix_money, 10000);
+
+            function fix_money() {
+                if (credit_money.innerText != credit) {
+                    credit_money.innerText = credit;
+                    scammer_warning();
+                }
+
+                if (savings_money.innerText != savings) {
+                    savings_money.innerText = savings;
+                    scammer_warning();
+                }
+
+                if (scam == true) {
+                    scammer_warning()
+                }
+            }
+
+            function scammer_warning() {
+                scam = true;
+                scammer.innerHTML = "<h2>SCAM WARNING! Someone is trying to scam you! DO NOT PAY THEM!</h2>"
+                if (container.lastElementChild != scammer) {
+                    container.appendChild(scammer);
+                }
+            }
+        </script>
+        <style>
+            :root {
+                font-family: system-ui, sans-serif;
+            }
+
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+                border: 1px solid #ddd;
+            }
+
+            th, td {
+                text-align: left;
+                padding: 1rem;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .warning {
+                padding-top: .1rem;
+                border-radius: .1rem;
+                text-align: center;
+                background-color: red;
+                padding: 1rem;
+            }
+        </style>
+    </body>
+</html>
