@@ -12,10 +12,11 @@
             <h1 class="done">ACCESS GRANTED!</h1>
         </div>
     </div>
+
     <script type="text/javascript">
         const ben = document.querySelector('#ben');
         const done = document.querySelector('.done');
-        const password = "CorrectHorseBatteryStaple!"//getPassword()
+        const password = getPassword(8+getRandomInt(24));
         const nspan = password.length;
         for (let i = 0; i < nspan; i++) {
             ben.innerHTML += "<span class='random' solved='false'>_</span>";
@@ -31,7 +32,7 @@
                     let random_char = getRandomChar();
                     spans[i].innerText = random_char;
                     if (random_char == password[i]) {
-                        spans[i].setAttribute("solved", "true")
+                        spans[i].setAttribute("solved", "true");
                         index++;
                         solved+=1;
                     }
@@ -40,8 +41,8 @@
                 index = 0;
             }
             if (solved >= nspan) {
-                done.style.display = "block"
-                clearInterval(timer)
+                done.style["background-color"] = "var(--green)"
+                clearInterval(timer);
             }
         }
 
@@ -54,24 +55,41 @@
         }
 
         function getRandomChar() {
-            let code = 33+getRandomInt(94)
-            while (code in [34 , 44, 46 ,60, 62, 92, 95, 96, 124]) {
-                code = 33+getRandomInt(94)
-            }
-            return String.fromCharCode(code)
+            let acceptable = [
+                "!", "#", "$", "%", "&", "(", ")", "[", "]", "{", "}", "?", "=", "+", "*", "-",
+                "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+                "A", "S", "D", "F", "G", "H", "J", "K", "L",
+                "Z", "X", "C", "V", "B", "N", "M",
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "@", 
+                "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+                "a", "s", "d", "f", "g", "h", "j", "k", "l",
+                "z", "x", "c", "v", "b", "n", "m"]
+            return choice(acceptable)
         }
 
         function getRandomInt(max) {
             return Math.floor(Math.random() * Math.floor(max));
         }
+
+        function choice(array) {
+            return array[getRandomInt(array.length)]
+        }
     </script>
+    
     <style>
+        :root {
+            --green: rgb(100, 255, 50);
+            --red: red;
+            --black: black;
+        }
+
         * {
             margin: 0;
             box-sizing: border-box;
             font-family:'Courier New', Courier, monospace;
             font-size: xx-large;
-            background-color: black;
+            background-color: var(--black);
+            color: var(--black);
         }
 
         .parent {
@@ -87,20 +105,19 @@
         }
 
         .done {
-            display: none;
             width: 100%;
             text-align: center;
             padding: 1rem;
-            background-color: rgb(100, 255, 50);
-            transition: all linear 2s;
+            background-color: var(--black);
+            transition: all linear .3s;
         }
 
         .random[solved="true"] {
-            color: rgb(100, 255, 50);
+            color: var(--green);
         }
 
         .random[solved="false"] {
-            color: red;
+            color: var(--red);
         }
 
         .container {
