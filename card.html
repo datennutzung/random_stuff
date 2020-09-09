@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Card</title>
+</head>
+<body>
+    <div class="parent container">
+        <div class="container card">
+            <h1>Card</h1>
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+    </script>
+    <style>
+        :root {
+            font-family: Roboto, sans-serif;
+            font-size: xx-large;
+            background-color: black;
+            --divider: 20;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .parent {
+            height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            display: grid;
+            place-items: center;
+        }
+
+        .card {
+            width: calc(8560px / var(--divider));
+            height: calc(5398px / var(--divider));
+            border-radius: calc(288px / var(--divider));
+            background-color: white;
+            color: black;
+        }
+    </style>
+</body>
+</html>
