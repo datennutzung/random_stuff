@@ -17,7 +17,7 @@ function update_total() {
         total += parseInt(price.innerText)+(parseInt(price.children[0].innerText)/100.0);
     }
     const total_price = document.querySelector("#total-price")
-    total_price.textContent = parseInt(total);
+    total_price.innerText = parseInt(total);
     let total_cent = document.createElement("small")
     total_cent.classList.add("cent")
     total_cent.textContent = ((total%1)*100).toString().padStart(2, "0")
