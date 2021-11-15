@@ -11,13 +11,29 @@
         <div class="container">
             <h1 id="clock">00:00:00</h1>
         </div>
+        <div class="dark_mode">
+            <label for="dark_check">Dark Mode</label><input type="checkbox" id="dark_check" checked onclick="switch_mode()">
+        </div>
     </div>
     <script type="text/javascript">
         const clock = document.querySelector("#clock");
+        const check = document.querySelector("#dark_check");
         function time() {
             clock.innerText = new Date(Date.now()).toLocaleTimeString();
+            switch_mode();
         }
         setInterval(time, 250);
+
+        function switch_mode() {
+            if (check.checked) {
+                document.documentElement.style.color = (0, 0, 0);
+                document.documentElement.style.backgroundColor = (255, 255, 255);
+            } else {
+                document.documentElement.style.color = (255, 255, 255);
+                document.documentElement.style.backgroundColor = (0, 0, 0);
+            }
+            return check.checked
+        }
     </script>
     <style>
         :root {
@@ -38,6 +54,11 @@
         .container {
             display: grid;
             place-items: center;
+        }
+
+        .dark_mode > label {
+            font-size: medium;
+            margin-right: .5rem;
         }
     </style>
 </body>
