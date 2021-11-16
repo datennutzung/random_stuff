@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500;700&display=swap');
 
+:root {
+  --primary-color: hsl(218, 100%, 58%);
+  --attention-color: hsl(0, 70%, 60%);
+}
+
 body {
   font-family: 'Comfortaa', sans-serif;
 }
@@ -22,7 +27,7 @@ fieldset {
   flex-direction: column;
   width: 6em;
   padding: .5em;
-  border: 1px solid black;
+  border: 1px black solid;
   border-radius: 1em;
 }
 
@@ -38,7 +43,8 @@ fieldset {
 }
 
 .card.selected {
-  background-color: lightcyan;
+  box-shadow: 0 0 0 2px white,
+              0 0 0 5px var(--primary-color);
 }
 
 .card p {
@@ -48,13 +54,14 @@ fieldset {
 }
 
 .free::after {
-  color: hsl(0, 70%, 60%);
+  color: var(--attention-color);
   content: "free";
 }
 
 .cent {
   position: absolute;
   padding-left: .1em;
+  font-size: .8rem;
 }
 
 .price.extra::before {
