@@ -138,8 +138,33 @@
                         <span class="price extra" data-price="0.75">0<small class="cent">75</small></span>
                     </label>
                 </fieldset>
-                <input type="submit" value="Order" />
                 <span id="total-price" class="price"></span>
+                <br />
+                <fieldset disabled="disabled" id="customer-information">
+                    <legend>your information</legend>
+                    <label for="first-name">
+                        <input type="text" name="first-name" id="first-name" placeholder="first name">
+                    </label>
+                    <label for="last-name">
+                        <input type="text" name="last-name" id="last-name" placeholder="last name">
+                    </label>
+                    <label for="street">
+                        <input type="text" name="street" id="street" placeholder="street name">
+                    </label>
+                    <label for="house-number">
+                        <input type="text" name="house-number" id="house-number" placeholder="nr">
+                    </label>
+                    <label for="area-code">
+                        <input type="text" name="area-code" id="area-code" placeholder="area code">
+                    </label>
+                    <label for="city">
+                        <input type="text" name="city" id="city" placeholder="city">
+                    </label>
+                    <label for="email">
+                        <input type="email" name="email" id="email" placeholder="email">
+                    </label>
+                </fieldset>
+                <input type="submit" value="Order" id="submit"/>
             </form>
         </main>
         <footer></footer>
