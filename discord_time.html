@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Discord Time Converter</title>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+        />
+    </head>
+    <body>
+        <main class="container">
+            <hgroup>
+                <h1>Discord Time Converter</h1>
+                <h2>Create a Time Code for Discord</h2>
+            </hgroup>
+            <p>
+                Enter your desired time and date in the input boxes below,
+                select a time format and click convert.
+                <br />
+                Your Time code will be generated and you can paste it into
+                Discord.
+            </p>
+            <form action="" onsubmit="convert_to_dc_time(this); return false;">
+                <fieldset class="grid">
+                    <legend>Date and Time</legend>
+                    <input type="date" name="date" id="date" required />
+                    <input type="time" name="time" id="time" required />
+                    <input type="button" value="Now" onclick="set_time_now()" />
+                </fieldset>
+                <select name="timeFormat" id="timeFormat" required>
+                    <option value="" disabled selected>
+                        --- Select a format ---
+                    </option>
+                    <optgroup label="Date Time">
+                        <option value="f" data-example="14 February 2022 19:59">
+                            Date and Time
+                        </option>
+                        <option
+                            value="F"
+                            data-example="Monday, 14 February 2022 19:59"
+                        >
+                            Date and Time with Day of the Week
+                        </option>
+                    </optgroup>
+                    <optgroup label="Date Only">
+                        <option value="d" data-example="14/02/2022">
+                            Short Format Date
+                        </option>
+                        <option value="D" data-example="14 February 2022">
+                            Long Format Date
+                        </option>
+                    </optgroup>
+                    <optgroup label="Time Only">
+                        <option value="t" data-example="19:59">
+                            Only Time
+                        </option>
+                        <option value="T" data-example="19:59:42">
+                            Only Time with Seconds
+                        </option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="R" data-example="2 days ago">
+                            Relative Time
+                        </option>
+                    </optgroup>
+                </select>
+                <input type="submit" value="Convert" />
+            </form>
+            <div id="result">
+                <span>Discord Time Code: <code id="dc_time"></code></span>
+                <a href="#result" id="copy">Copy</a>
+            </div>
+        </main>
+    </body>
+    <style>
+        #copy {
+            margin-left: .75rem;
+            position: relative;
+        }
+
+        #copy::after {
+            position: absolute;
+            content: attr(data-after);
+            margin-left: 0.5rem;
+            text-decoration: none;
+        }
+
+        #result {
+            display: none;
+        }
+
+    </style>
+    <script type="application/javascript">
+        const DATE = document.getElementById("date");
+        const TIME = document.getElementById("time");
+        const RESULT = document.getElementById("result");
+        const DC_TIME = document.getElementById("dc_time");
+
+        function copy() {
+            navigator.clipboard.writeText(DC_TIME.innerText);
+            let copy = document.querySelector("#copy");
+            copy.setAttribute("data-after", "✅");
+            setTimeout(() => {
+                copy.removeAttribute("data-after");
+            }, 3000);
+            return false;
+        }
+
+        function set_time_now() {
+            let now = new Date(Date.now());
+            DATE.valueAsDate = now;
+            let f = (num) => {
+                return num.toString().padStart(2, "0");
+            };
+            TIME.value = f(now.getHours()) + ":" + f(now.getMinutes());
+        }
+
+        function convert_to_dc_time(form_element) {
+            let datetime = new Date(DATE.value + " " + TIME.value);
+            let format = form_element.timeFormat.value;
+            DC_TIME.innerText = `<t:${datetime.getTime() / 1000}:${format}>`;
+            result.style.display = "block";
+            return false;
+        }
+
+        document.querySelectorAll("optgroup>option").forEach((element) => {
+            element.title = element.dataset.example;
+        });
+
+        document.querySelector("#copy").addEventListener("click", () => {
+            copy();
+            return false;
+        })
+
+        set_time_now();
+    </script>
+</html>
