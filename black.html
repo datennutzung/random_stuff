@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        :-webkit-full-screen,
+        :-ms-fullscreen,
+        :fullscreen {
+            color: black;
+        }
+
+        button {
+            border: 1px solid black;
+            border-radius: 0;
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <body>
+        <button onclick="openFullscreen()">Fullscreen</button>
+    </body>
+    <script>
+        const elem = document.documentElement;
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
+</html>
