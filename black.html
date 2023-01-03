@@ -4,36 +4,28 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Black</title>
     </head>
     <style>
-        :-webkit-full-screen,
-        :-ms-fullscreen,
-        :fullscreen {
+        :root {
             background-color: black;
         }
 
         button {
             border: 1px solid black;
-            border-radius: 0;
             background-color: black;
-            color: white;
+            color: gray;
         }
     </style>
     <body>
-        <button onclick="openFullscreen()">Fullscreen</button>
+        <button onclick="toggleFullscreen()">Toggle Fullscreen</button>
     </body>
     <script>
-        const elem = document.documentElement;
-        function openFullscreen() {
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) {
-                /* Safari */
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) {
-                /* IE11 */
-                elem.msRequestFullscreen();
+        function toggleFullscreen() {
+            if (window.fullScreen) {
+                document.exitFullscreen();
+            } else {
+                document.documentElement.requestFullscreen();
             }
         }
     </script>
