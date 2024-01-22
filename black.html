@@ -34,27 +34,34 @@
         .nocursor {
             cursor: none;
         }
+
+        .nocursor button {
+            color: black;
+        }
     </style>
     <body>
-        <button onclick="toggleFullscreen()">Toggle Fullscreen</button>
+        <button id="fullscreenButton">Toggle Fullscreen</button>
     </body>
     <script>
         var timeout = undefined;
+        const fullscreenButton = document.getElementByID("fullscreenButton");
 
         function toggleFullscreen() {
-            if (window.fullScreen) {
+            if (document.fullScreen) {
                 document.exitFullscreen();
             } else {
                 document.documentElement.requestFullscreen();
             }
         }
 
+        fullscreenButton.addEventListener("click", toggleFullscreen);
+        
         document.body.addEventListener("mousemove", () => {
             clearTimeout(timeout);
             document.body.classList.toggle("nocursor", false);
             timeout = setTimeout(() => {
                 document.body.classList.toggle("nocursor", true);
             }, 3000);
-        })
+        });
     </script>
 </html>
